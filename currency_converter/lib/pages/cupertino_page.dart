@@ -1,43 +1,36 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
 
-class ConverterMaterialPage extends StatefulWidget {
-  const ConverterMaterialPage({super.key});
+class CurrencyConverterCupertinoPage extends StatefulWidget {
+  const CurrencyConverterCupertinoPage({super.key});
+
   @override
-  State<ConverterMaterialPage> createState() {
-    return _MymaterialPage();
-  }
+  State<CurrencyConverterCupertinoPage> createState() =>
+      _CurrencyConverterCupertinoPageState();
 }
 
-class _MymaterialPage extends State<ConverterMaterialPage> {
+class _CurrencyConverterCupertinoPageState
+    extends State<CurrencyConverterCupertinoPage> {
   double result = 0;
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    const border = OutlineInputBorder(
-      borderSide: BorderSide(
-        width: 1,
-        style: BorderStyle.solid,
-      ),
-    );
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text(
           'Currency Converter',
           style: TextStyle(color: Color.fromRGBO(165, 160, 90, 1)),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.black54,
+        backgroundColor: CupertinoColors.black,
       ),
-      body: Center(
+      child: Center(
         child: ColoredBox(
           color: const Color.fromRGBO(198, 76, 123, 0.5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '${result.toStringAsFixed(2)} ETB',
+                'ETB ${result.toStringAsFixed(2)}',
                 style: const TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.w600,
@@ -45,28 +38,17 @@ class _MymaterialPage extends State<ConverterMaterialPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: CupertinoTextField(
                   controller: textEditingController,
                   onSubmitted: (String value) {
                     setState(() {
                       result = double.parse(textEditingController.text) * 100;
                     });
                   },
+                  placeholder: 'Enter amount',
+                  prefix: const Icon(CupertinoIcons.money_dollar),
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w500),
-                  decoration: const InputDecoration(
-                    hintText: ' amount',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    prefixIcon: Icon(Icons.monetization_on),
-                    filled: true,
-                    fillColor: Color.fromRGBO(100, 30, 0, 0.2),
-                    focusedBorder: border,
-                    enabledBorder: border,
-                  ),
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
@@ -74,21 +56,13 @@ class _MymaterialPage extends State<ConverterMaterialPage> {
               ),
               Container(
                 margin: const EdgeInsets.all(10),
-                child: ElevatedButton(
+                child: CupertinoButton(
                   onPressed: () {
                     setState(() {
                       result = double.parse(textEditingController.text) * 100;
                     });
                   },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 20,
-                    backgroundColor: Colors.black87,
-                    minimumSize: const Size(double.infinity, 60),
-                    foregroundColor: Colors.white70,
-                    shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                  color: CupertinoColors.black,
                   child: const Text(
                     'Convert',
                     style: TextStyle(
