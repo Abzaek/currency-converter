@@ -68,6 +68,7 @@ class _CurrencyConverterCupertinoPageState
                     style: TextStyle(
                       fontSize: 24,
                       fontFamily: AutofillHints.addressCity,
+                      color: CupertinoColors.white,
                     ),
                   ),
                 ),
